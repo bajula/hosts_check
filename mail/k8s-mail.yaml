@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: host-mail-cron
+  namespace: monitoring
+spec:
+  schedule: "*/15 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: mail-container
+              image: mwmail:latest
+              command: ["/bin/bash", "/opt/hosts_mail.sh"]
+          restartPolicy: OnFailure
