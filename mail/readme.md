@@ -4,4 +4,4 @@ Create the container with command:
 docker build -t mwmail /home/alex/hosts_check/mail/Dockerfile 
 # upload the image to container repository
 docker push mwmail 
-```docker build
+```bash
