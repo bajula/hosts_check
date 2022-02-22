@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: host-check-cron
+  namespace: monitoring
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ping-container
+              image: mwping:latest
+              command: ["/bin/bash", "/opt/check_hosts.sh"]
+          restartPolicy: OnFailure
